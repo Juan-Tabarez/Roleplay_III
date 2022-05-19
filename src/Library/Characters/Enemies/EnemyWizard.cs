@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 namespace RoleplayGame
 {
-    public class Wizard: MagicHero
+    public class EnemyWizard: MagicEnemy
     {
-        public Wizard(string name)
+        public EnemyWizard(string name)
         {
             this.Name = name;
             

@@ -1,8 +1,8 @@
 namespace RoleplayGame
 {
-    public class Dwarf: Hero
+    public class EnemyDwarf: Enemy
     {
-        public Dwarf(string name) 
+        public EnemyDwarf(string name)
         {
             this.Name = name;
             
