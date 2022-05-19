@@ -1,23 +1,81 @@
+using System.Collections.Generic;
 namespace RoleplayGame
 {
-    public abstract class Character
+    public abstract class Character : ICharacter
     {
-        string Name { get; set; }
+        private int health = 100;
 
-        int VP { get; }
+        protected List<IItem> items = new List<IItem>();
 
-        int Health { get; }
+        public string Name { get; set; }
 
-        int AttackValue { get; }
+        public bool IsAlive => this.health > 0;
 
-        int DefenseValue { get; }
+        public int Health
+        {
+            get
+            {
+                return this.health;
+            }
+            private set
+            {
+                this.health = value < 0 ? 0 : value;
+            }
+        }
 
-        public abstract void AddItem(IItem item);
+        public virtual int AttackValue
+        {
+            get
+            {
+                int value = 0;
+                foreach (IItem item in this.items)
+                {
+                    if (item is IAttackItem)
+                    {
+                        value += (item as IAttackItem).AttackValue;
+                    }
+                }
+                return value;
+            }
+        }
 
-        public abstract void RemoveItem(IItem item);
+        public virtual int DefenseValue
+        {
+            get
+            {
+                int value = 0;
+                foreach (IItem item in this.items)
+                {
+                    if (item is IDefenseItem)
+                    {
+                        value += (item as IDefenseItem).DefenseValue;
+                    }
+                }
+                return value;
+            }
+        }
 
-        public abstract void Cure();
+        public void AddItem(IItem item)
+        {
+            this.items.Add(item);
+        }
 
-        public abstract void ReceiveAttack(int power);
+        public void RemoveItem(IItem item)
+        {
+            this.items.Remove(item);
+        }
+
+        public void Cure()
+        {
+            this.Health = 100;
+        }
+
+        public void ReceiveAttack(int power)
+        {
+            if (this.DefenseValue < power)
+            {
+                this.Health -= power - this.DefenseValue;
+            }
+        }
     }
 }
