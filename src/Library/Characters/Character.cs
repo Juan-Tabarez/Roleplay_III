@@ -4,6 +4,8 @@ namespace RoleplayGame
     {
         string Name { get; set; }
 
+        int VP { get; }
+
         int Health { get; }
 
         int AttackValue { get; }
