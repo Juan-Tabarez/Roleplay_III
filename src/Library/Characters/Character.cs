@@ -2,22 +2,22 @@ namespace RoleplayGame
 {
     public abstract class Character
     {
-        string Name { get; set; }
+        public string Name { get; set; }
 
-        int VP { get; }
+        public int VP { get;}
 
-        int Health { get; }
+        public int Health { get; set; }
 
-        int AttackValue { get; }
+        public int AttackValue { get; }
 
-        int DefenseValue { get; }
+        public int DefenseValue { get; }
 
-        public abstract void AddItem(IItem item);
+        /*public abstract void AddItem(IItem item);
 
         public abstract void RemoveItem(IItem item);
 
         public abstract void Cure();
 
-        public abstract void ReceiveAttack(int power);
+         public abstract void ReceiveAttack(int power);*/
     }
 }
