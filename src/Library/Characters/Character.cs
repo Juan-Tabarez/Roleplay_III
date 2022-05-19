@@ -62,7 +62,7 @@ namespace RoleplayGame
 
         public void RemoveItem(IItem item)
         {
-            this.items.Add(item);
+            this.items.Remove(item);
         }
 
         public void Cure()

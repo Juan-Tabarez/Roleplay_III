@@ -59,7 +59,7 @@ namespace RoleplayGame
 
         public void RemoveItem(IMagicalItem item)
         {
-            this.magicalItems.Add(item);
+            this.magicalItems.Remove(item);
         }
     }
 }
