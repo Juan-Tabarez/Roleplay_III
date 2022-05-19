@@ -16,9 +16,9 @@ namespace RoleplayGame
             this.AddItem(new Staff());
         }
 
-        public string Name { get; set; }
+        public new string Name { get; set; }
         
-        public int AttackValue
+        public new int AttackValue
         {
             get
             {
@@ -30,18 +30,11 @@ namespace RoleplayGame
                         value += (item as IAttackItem).AttackValue;
                     }
                 }
-                foreach (IMagicalItem item in this.magicalItems)
-                {
-                    if (item is IMagicalAttackItem)
-                    {
-                        value += (item as IMagicalAttackItem).AttackValue;
-                    }
-                }
                 return value;
             }
         }
 
-        public int DefenseValue
+        public new int DefenseValue
         {
             get
             {
@@ -53,18 +46,11 @@ namespace RoleplayGame
                         value += (item as IDefenseItem).DefenseValue;
                     }
                 }
-                foreach (IMagicalItem item in this.magicalItems)
-                {
-                    if (item is IMagicalDefenseItem)
-                    {
-                        value += (item as IMagicalDefenseItem).DefenseValue;
-                    }
-                }
                 return value;
             }
         }
 
-        public int Health
+        public new int Health
         {
             get
             {
@@ -76,14 +62,29 @@ namespace RoleplayGame
             }
         }
 
-        public override void ReceiveAttack(int power)
+        public new int VP
         {
-            if (this.DefenseValue < power)
+            get
             {
-                this.Health -= power - this.DefenseValue;
+                return this.VP;
+            }
+
+            private set 
+            {
+                this.VP = value;
             }
         }
-
+        public override void Attack(Character character)
+        {
+            if (character.Health > 0)
+            {
+                character.Health -=  this.AttackValue - character.DefenseValue;
+                if (character.Health <= 0)
+                {
+                    this.VP += character.VP;
+                }
+            }
+        }
         public override void Cure()
         {
             this.Health = 100;

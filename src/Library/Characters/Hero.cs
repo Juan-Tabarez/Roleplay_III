@@ -22,7 +22,7 @@ namespace RoleplayGame
         public abstract void Cure();
         
 
-        public abstract void Attack(Enemy enemy);
+        public abstract void Attack(Character character);
         
     }
 }

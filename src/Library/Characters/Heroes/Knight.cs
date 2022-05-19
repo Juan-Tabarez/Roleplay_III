@@ -74,14 +74,14 @@ namespace RoleplayGame
                 this.VP = value;
             }
         }
-        public override void Attack(Enemy enemy)
+        public override void Attack(Character character)
         {
-            if (enemy.Health > 0)
+            if (character.Health > 0)
             {
-                enemy.Health -=  this.AttackValue -enemy.DefenseValue;
-                if (enemy.Health <= 0)
+                character.Health -=  this.AttackValue - character.DefenseValue;
+                if (character.Health <= 0)
                 {
-                    this.VP += enemy.VP;
+                    this.VP += character.VP;
                 }
             }
         }

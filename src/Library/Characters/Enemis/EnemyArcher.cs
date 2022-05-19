@@ -15,9 +15,9 @@ namespace RoleplayGame
             this.AddItem(new Helmet());
         }
 
-        public string Name { get; set; }
+        public new string Name { get; set; }
         
-        public int AttackValue
+        public new int AttackValue
         {
             get
             {
@@ -33,7 +33,7 @@ namespace RoleplayGame
             }
         }
 
-        public int DefenseValue
+        public new int DefenseValue
         {
             get
             {
@@ -49,25 +49,42 @@ namespace RoleplayGame
             }
         }
 
-        public int Health
+        public new int Health
         {
             get
             {
                 return this.health;
             }
-            private set
+            set
             {
                 this.health = value < 0 ? 0 : value;
             }
         }
 
-        public override void ReceiveAttack(int power)
+        public new int VP
         {
-            if (this.DefenseValue < power)
+            get
             {
-                this.Health -= power - this.DefenseValue;
+                return this.VP;
+            }
+
+            private set 
+            {
+                this.VP = value;
             }
         }
+        public override void Attack(Character character)
+        {
+            if (character.Health > 0)
+            {
+                character.Health -=  this.AttackValue - character.DefenseValue;
+                if (character.Health <= 0)
+                {
+                    this.VP += character.VP;
+                }
+            }
+        }
+
 
         public override void Cure()
         {

@@ -24,8 +24,7 @@ namespace RoleplayGame
         public abstract void Cure();
         
         
-        public abstract void Attack(Hero hero);
-        
+        public abstract void Attack(Character character);
         
     }
 }
