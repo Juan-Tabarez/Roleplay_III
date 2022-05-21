@@ -7,6 +7,7 @@ namespace Program
     {
         static void Main(string[] args)
         {
+            Encounters encounters = new Encounters();
             SpellsBook book = new SpellsBook();
             book.AddSpell(new SpellOne());
             book.AddSpell(new SpellOne());
@@ -35,17 +36,17 @@ namespace Program
             EnemyKnight enemyKnight = new EnemyKnight("Arthur");
             EnemyWizard enemyWizard = new EnemyWizard("Voldemort");
 
-            Encounters.AddHeroForEncounter(gandalf);
-            Encounters.AddHeroForEncounter(gimli);
-            Encounters.AddHeroForEncounter(archer);
-            Encounters.AddHeroForEncounter(knight);
+            encounters.AddHeroForEncounter(gandalf);
+            encounters.AddHeroForEncounter(gimli);
+            encounters.AddHeroForEncounter(archer);
+            encounters.AddHeroForEncounter(knight);
 
-            Encounters.AddEnemyForEncounter(enemyArcher);
-            Encounters.AddEnemyForEncounter(enemyDwarf);
-            Encounters.AddEnemyForEncounter(enemyWizard);
-            Encounters.AddEnemyForEncounter(enemyKnight);
+            encounters.AddEnemyForEncounter(enemyArcher);
+            encounters.AddEnemyForEncounter(enemyDwarf);
+            encounters.AddEnemyForEncounter(enemyWizard);
+            encounters.AddEnemyForEncounter(enemyKnight);
 
-            Encounters.DoEncounter();
+            encounters.DoEncounter();
 
         }
     }

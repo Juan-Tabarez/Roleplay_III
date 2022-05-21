@@ -6,47 +6,63 @@ namespace RoleplayGame
 {
     public class Encounters
     {
-        private static List<Hero> heros = new List<Hero>();
+        private List<Hero> heros = new List<Hero>();
 
-        private static List<Enemy> enemies = new List<Enemy>();
+        public List<Hero> Heros
+        {
+            get
+            {
+                return this.heros;
+            }
+        }
 
-        public static void AddHeroForEncounter(Hero hero)
+        private List<Enemy> enemies = new List<Enemy>();
+
+        public List<Enemy> Enemies
+        {
+            get
+            {
+                return this.enemies;
+            }
+        }
+
+        public void AddHeroForEncounter(Hero hero)
         {
             heros.Add(hero);
         }
 
-        public static void RemoveHeroFromEncounter(Hero hero)
+        public void RemoveHeroFromEncounter(Hero hero)
         {
             heros.Remove(hero);
         }
 
-        public static void AddEnemyForEncounter(Enemy enemy)
+        public void AddEnemyForEncounter(Enemy enemy)
         {
             enemies.Add(enemy);
         }
 
-        public static void RemoveEnemyFromEncounter(Enemy enemy)
+        public void RemoveEnemyFromEncounter(Enemy enemy)
         {
             enemies.Remove(enemy);
         }
 
-        public static void DoEncounter()
+        public void DoEncounter()
         {
-            while (heros.Count > 0 && enemies.Count > 0)
+            while (this.heros.Count > 0 && this.enemies.Count > 0)
             { 
                 HashSet<Hero> toRemove = new HashSet<Hero>();
                 int heroPosition = 0;
 
-                for (int enemyPosition = 0 ; enemyPosition < enemies.Count ; enemyPosition++)
+                for (int enemyPosition = 0 ; enemyPosition < this.enemies.Count ; enemyPosition++)
                 {   
                     //Si el ataque se realizo correctamente(no se atacó a un heroe muerto) y 
                     //el heroe atacado murió en ese ataque, entonces el heroe muerto se agrega a una 
                     //colección auxiliar para poder ser eliminado de "heros" luego del bucle para
                     //que no haya problemas de excepciones.
-                    if ((enemies[enemyPosition].Attack(heros[heroPosition])) && (!heros[heroPosition].IsAlive))
+                    if ((this.enemies[enemyPosition].Attack(this.heros[heroPosition])) && (!this.heros[heroPosition].IsAlive))
                     {   
                         Console.WriteLine("The hero " + heros[heroPosition].Name + " is dead...");
-                        toRemove.Add(heros[heroPosition]);
+                        toRemove.Add(this.heros[heroPosition]);
                     }
                     if (heroPosition == heros.Count - 1)
                         heroPosition = 0;                 
@@ -54,14 +70,14 @@ namespace RoleplayGame
                         heroPosition++;        
                 }
                 //Se eliminan los heroes muertos de "heros". 
-                heros.RemoveAll(toRemove.Contains);
+                this.heros.RemoveAll(toRemove.Contains);
 
-                if (heros.Count > 0)
+                if (this.heros.Count > 0)
                 {
-                    foreach (Hero hero in heros)
+                    foreach (Hero hero in this.heros)
                     {   
                         //Si recorro la lista normalmente me da una excepcion por cambiar el orden.
-                        foreach (Enemy enemy in enemies.Reverse<Enemy>())
+                        foreach (Enemy enemy in this.enemies.Reverse<Enemy>())
                         {
                             hero.Attack(enemy);
 
@@ -70,13 +86,13 @@ namespace RoleplayGame
 
                             if (!enemy.IsAlive){ 
                                 Console.WriteLine("The enemy " + enemy.Name + " is dead...");
-                                enemies.Remove(enemy);
+                                this.enemies.Remove(enemy);
                             }
                         }
                     }
                 }
             }
-            if (enemies.Count > 0)
+            if (this.enemies.Count > 0)
                 Console.WriteLine("Enemies Victory");
             else 
                 Console.WriteLine("Heros Victory");  
