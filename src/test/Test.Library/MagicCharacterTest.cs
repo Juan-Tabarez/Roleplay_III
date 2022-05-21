@@ -3,9 +3,11 @@
 
     namespace Test.Library
     {
-        public class WizardTest
+        public class MagicCharacterTest
         {
             Wizard gandalf;
+
+            MagicHat magicHat;
 
             [SetUp]
             public void Setup()
@@ -15,7 +17,8 @@
                 this.gandalf = new Wizard("Gandalf");
                 this.gandalf.AddItem(book);
             }
-
+            
+            /*
             //Test que demuestra que es posible asignar un nombre distinto.
             [Test]
             public void ValidNameTest()
@@ -30,6 +33,7 @@
             {
                 Assert.AreEqual(this.gandalf.Health, 100);
             }
+            */
 
             //Test para saber el ataque de un personaje.
             [Test]
@@ -47,6 +51,32 @@
                 Assert.AreEqual(expectedDefense, this.gandalf.DefenseValue);
             }
 
+            //Test que demuestra que se puede añadir un item magico correctamente.
+            [Test]
+            public void AddMagicalItemTest()
+            {   
+                this.magicHat = new MagicHat();
+                this.gandalf.AddItem(magicHat);
+
+                //100 del Staff + 70 del spellOne + 15 del MagicHat
+                int expectedDefenseValue = 185;
+                Assert.AreEqual(expectedDefenseValue, this.gandalf.DefenseValue);
+            }
+
+            //Test que demuestra que se puede añadir un item magico correctamente.
+            [Test]
+            public void RemoveMagicalItemTest()
+            {   
+                this.magicHat = new MagicHat();
+                this.gandalf.AddItem(magicHat);
+                this.gandalf.RemoveItem(magicHat);
+            
+                int expectedDefenseValue = 170;
+                Assert.AreEqual(expectedDefenseValue, this.gandalf.DefenseValue);
+            }
+
+
+            /*
             //Test para verificar que un personaje puede atacar a otro personaje.
             [Test]
             public void AttackCharacterTest()
@@ -65,5 +95,6 @@
                 this.gandalf.Cure();
                 Assert.AreEqual(this.gandalf.Health, 100);
             }
+            */
         }
     }

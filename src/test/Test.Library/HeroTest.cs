@@ -3,7 +3,7 @@ using RoleplayGame;
 
 namespace Test.Library
 {
-    public class ArcherTest
+    public class HeroTest
     {
         Archer legolas;
 
@@ -20,14 +20,14 @@ namespace Test.Library
         public void ValidNameTest()
         {
             this.legolas.Name = "Sarion";
-            Assert.AreEqual(this.legolas.Name, "Sarion");
+            Assert.AreEqual("Sarion", this.legolas.Name);
         }
 
         //Test que demuestra que es posible asignar una vida válida.
         [Test]
         public void ValidHealthTest()
         {
-            Assert.AreEqual(this.legolas.Health, 100);
+            Assert.AreEqual(100, this.legolas.Health);
         }
 
         //Test para saber el ataque de un personaje.
@@ -62,7 +62,7 @@ namespace Test.Library
         {
             this.legolas.ReceiveAttack(this.legolas.AttackValue * 3);
             this.legolas.Cure();
-            Assert.AreEqual(this.legolas.Health, 100);
+            Assert.AreEqual(100, this.legolas.Health);
         }
 
         //Test que demuestra que se le puede añadir un item nuevo a un personaje correctamente.
@@ -73,7 +73,7 @@ namespace Test.Library
             this.bow = new Bow();
             this.legolas.AddItem(bow);
             int expectedAttack = 30;
-            Assert.AreEqual(this.legolas.AttackValue, expectedAttack);
+            Assert.AreEqual(expectedAttack, this.legolas.AttackValue);
         }
 
         //Test que demuestra que se le puede remover un item nuevo a un personaje correctamente.
@@ -85,7 +85,62 @@ namespace Test.Library
             this.legolas.AddItem(bow);
             this.legolas.RemoveItem(bow);
             int expectedAttack = 15;
-            Assert.AreEqual(this.legolas.AttackValue, expectedAttack);
+            Assert.AreEqual(expectedAttack, this.legolas.AttackValue);
+        }
+
+        //Test que demuestra que un heroe al matar a un enemigo se queda con sus VP.
+        [Test]
+
+        public void AttackTest1()
+        {
+            EnemyArcher enemyArcher = new EnemyArcher("Varus");
+            this.bow = new Bow();
+            this.legolas.AddItem(bow);
+            this.legolas.AddItem(bow);
+            this.legolas.AddItem(bow);
+            this.legolas.AddItem(bow);
+            this.legolas.AddItem(bow);
+            this.legolas.AddItem(bow);
+            this.legolas.AddItem(bow);
+
+            this.legolas.Attack(enemyArcher);
+            Assert.AreEqual(false, enemyArcher.IsAlive);
+            int expectedVPs = 2;
+            Assert.AreEqual(expectedVPs, this.legolas.VP);
+        }
+
+        //Test que demuestra que un heroe al atacar pero no matar a un enemigo no se queda con sus VP.
+        [Test]
+
+        public void AttackTest2()
+        {
+            EnemyArcher enemyArcher = new EnemyArcher("Varus");
+            this.legolas.Attack(enemyArcher);
+            int expectedVPs = 0;
+            Assert.AreEqual(expectedVPs, this.legolas.VP);
+        }
+
+        //Test que demuestra que un heroe muerto no puede atacar.
+        [Test]
+
+        public void AttackTest3()
+        {
+            this.legolas.ReceiveAttack(120);
+            EnemyArcher enemyArcher = new EnemyArcher("Varus");
+            
+            bool expected = false;
+            Assert.AreEqual(expected, this.legolas.Attack(enemyArcher));
+        }
+
+        //Test que demuestra que un heroe no puede atacar a un enemigo muerto.
+        [Test]
+
+        public void AttackTest4()
+        {
+            EnemyArcher enemyArcher = new EnemyArcher("Varus");
+            enemyArcher.ReceiveAttack(120);
+            bool expected = false;
+            Assert.AreEqual(expected, this.legolas.Attack(enemyArcher));
         }
     }
 }

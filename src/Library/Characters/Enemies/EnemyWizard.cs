@@ -7,6 +7,8 @@ namespace RoleplayGame
             this.Name = name;
             
             this.AddItem(new Staff());
+
+            this.VP = 2;
         }
     }
 }

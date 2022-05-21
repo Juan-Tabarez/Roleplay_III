@@ -4,7 +4,8 @@ namespace RoleplayGame
 {
     public abstract class Enemy: Character
     {
-        protected int vp;
+        //Esto tiene que ser privado
+        private int vp;
 
         public int VP
         {
@@ -13,7 +14,9 @@ namespace RoleplayGame
                 return this.vp;
             }
 
-            private set 
+            //Creo que este set no puede ser privado, sino no le podemos 
+            //cambiar los VP a cada personaje particular.
+            protected set 
             {
                 this.vp = value;
             }
