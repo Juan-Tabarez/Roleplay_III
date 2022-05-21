@@ -26,6 +26,27 @@ namespace Program
             gimli.Cure();
 
             Console.WriteLine($"Someone cured Gimli. Gimli now has ❤️ {gimli.Health}");
+
+            Archer archer = new Archer("Legolas");
+            Knight knight = new Knight("Dave");
+
+            EnemyDwarf enemyDwarf = new EnemyDwarf("Goblin");
+            EnemyArcher enemyArcher = new EnemyArcher("Varus");
+            EnemyKnight enemyKnight = new EnemyKnight("Arthur");
+            EnemyWizard enemyWizard = new EnemyWizard("Voldemort");
+
+            Encounters.AddHeroForEncounter(gandalf);
+            Encounters.AddHeroForEncounter(gimli);
+            Encounters.AddHeroForEncounter(archer);
+            Encounters.AddHeroForEncounter(knight);
+
+            Encounters.AddEnemyForEncounter(enemyArcher);
+            Encounters.AddEnemyForEncounter(enemyDwarf);
+            Encounters.AddEnemyForEncounter(enemyWizard);
+            Encounters.AddEnemyForEncounter(enemyKnight);
+
+            Encounters.DoEncounter();
+
         }
     }
 }
