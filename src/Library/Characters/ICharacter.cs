@@ -14,8 +14,6 @@ namespace RoleplayGame
 
         public void RemoveItem(IItem item);
 
-        public void Cure();
-
         public void ReceiveAttack(int power);
     }
 }
