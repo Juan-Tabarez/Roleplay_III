@@ -56,15 +56,6 @@ namespace Test.Library
             Assert.AreEqual(expectedHealth, frey.Health);
         }
 
-        //Test que demuestra que un personaje puede curarse correctamente.
-        [Test]
-        public void HealTest()
-        {
-            this.varus.ReceiveAttack(this.varus.AttackValue * 3);
-            this.varus.Cure();
-            Assert.AreEqual(100, this.varus.Health);
-        }
-
         //Test que demuestra que se le puede añadir un item nuevo a un personaje correctamente.
         [Test]
         public void AddItemTest()

@@ -34,5 +34,12 @@ namespace RoleplayGame
             }
             return false;
         }
+
+        
+        public void Cure()
+        {
+            this.Health = 100;
+            this.VP -=  5;
+        }
     }
 }

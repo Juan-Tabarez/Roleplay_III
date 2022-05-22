@@ -17,7 +17,7 @@ namespace RoleplayGame
             {
                 return this.health;
             }
-            private set
+            protected set
             {
                 this.health = value < 0 ? 0 : value;
             }
@@ -63,11 +63,6 @@ namespace RoleplayGame
         public void RemoveItem(IItem item)
         {
             this.items.Remove(item);
-        }
-
-        public void Cure()
-        {
-            this.Health = 100;
         }
 
         public void ReceiveAttack(int power)

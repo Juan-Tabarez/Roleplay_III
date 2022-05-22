@@ -61,7 +61,6 @@ namespace RoleplayGame
                     //que no haya problemas de excepciones.
                     if ((this.enemies[enemyPosition].Attack(this.heros[heroPosition])) && (!this.heros[heroPosition].IsAlive))
                     {   
-                        Console.WriteLine("The hero " + heros[heroPosition].Name + " is dead...");
                         toRemove.Add(this.heros[heroPosition]);
                     }
                     if (heroPosition == heros.Count - 1)
@@ -85,17 +84,12 @@ namespace RoleplayGame
                                 hero.Cure();
 
                             if (!enemy.IsAlive){ 
-                                Console.WriteLine("The enemy " + enemy.Name + " is dead...");
                                 this.enemies.Remove(enemy);
                             }
                         }
                     }
                 }
             }
-            if (this.enemies.Count > 0)
-                Console.WriteLine("Enemies Victory");
-            else 
-                Console.WriteLine("Heros Victory");  
         }
     }
 }

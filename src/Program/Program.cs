@@ -47,7 +47,6 @@ namespace Program
             encounters.AddEnemyForEncounter(enemyKnight);
 
             encounters.DoEncounter();
-
         }
     }
 }
